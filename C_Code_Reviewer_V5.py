@@ -2,7 +2,6 @@ import os
 import time
 import json
 from typing import Optional, Dict, Any, List
-from st_supabase_connection import SupabaseConnection
 from supabase import create_client, Client
 import requests
 import streamlit as st
@@ -412,4 +411,5 @@ else:
         f'<div class="small-caption">Provider: Codestral Model: {selected_model} API URL: {MISTRAL_API_URL}</div>',
         unsafe_allow_html=True
     )
+
 
