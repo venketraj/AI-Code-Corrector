@@ -26,10 +26,10 @@ DEFAULT_OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "mistral")
 DEFAULT_CODESTRAL_MODEL = os.getenv("CODESTRAL_MODEL", "codestral-latest")
 DEFAULT_SUPABASE_TABLE = os.getenv("SUPABASE_TABLE", "code_transactions")
 
-SUPABASE_URL = os.environ.get("SUPABASE_URL","https://uwigmdnhwyeuycqquzru.supabase.co")
-SUPABASE_KEY = os.environ.get("SUPABASE_ANON_KEY","sb_publishable_S9bmhLUwZ13pmiqfovbj6w_TRcM_sqC")
-MISTRAL_API_KEY = "LTIT3rxCF0vyjonVc1GQ4KPTozbsOT2D"
-MISTRAL_API_URL = "https://codestral.mistral.ai"
+SUPABASE_URL = st.secrets["supabase"]["url"]
+SUPABASE_KEY = st.secrets["supabase"]["anon_key"]
+MISTRAL_API_KEY = st.secrets["codestral"]["api_key"]
+MISTRAL_API_URL = st.secrets["codestral"]["base_url"]
 
 # -------------------------
 # Styles
