@@ -98,8 +98,8 @@ else:
 # -------------------------
 # Controls
 # -------------------------
-temperature = 0.4
-max_tokens = 32000
+temperature = 0.2
+max_tokens = 100000
 
 # Session defaults for history load
 for key, default in [
@@ -213,22 +213,37 @@ with code_col:
 # Prompt and generators
 # -------------------------
 def build_prompt_for_summary_and_code(guidelines: str, code: str, Laungauge:str) -> str:
-    return f"""You are an expert {Laungauge} engineer. Apply the following guidelines to rewrite the given {Laungauge} code.
-Return a compact JSON object with exactly two keys:
-- "summary": a bullet-style explanation of the changes applied (no code blocks), focusing on what changed and why and keep it short to the point.
-- "code": the final rewritten {Laungauge} source as a plain string.
+    return f"""##🎯 Code Refactoring Task: {Language} Expert Rewrite
 
-Guidelines:
+You are an expert **{Language} Engineer**. Your task is to refactor the provided code according to a set of mandatory **Guidelines**.
+
+### 1. 📋 Input Variables
+1.  **{Language}:** The programming language of the code (e.g., Python, C++, Java).
+2.  **Guidelines:** A list of rules that **must** be applied during the rewrite.
+3.  **Original Code:** The source code block to be refactored.
+
+### 2. 🛠️ Guidelines for Refactoring
+* **Apply All Rules:** Every guideline must be applied where relevant.
+* **Maintain Functionality:** The rewritten code must be functionally equivalent to the original.
+* **Clarity over Density:** While striving for compactness, prioritize code readability and adherence to modern {Language} best practices.
+
+### 3. 📝 Output Requirement & Format
+
+Return a **compact, single-line JSON object** with exactly two top-level keys. No other text, explanations, or conversational filler should precede or follow the JSON object.
+
+| Key | Value Type | Description |
+| :--- | :--- | :--- |
+| **"summary"** | String | A **bulleted list** of changes. Each bullet MUST include the guideline applied, the function/area affected, and the approximate line number(s). Example: `- [Guideline Name] Refactored loop condition for efficiency (L45-L48).` |
+| **"code"** | String | The final, fully rewritten and functional {Language} source code as a single plain string (properly escaped for JSON). |
+
+### 4. 🚀 Task Execution
+
+**Language:** {Language}
+
+**Guidelines:**
 {guidelines}
 
-Original Code:
-{code}
-
-Output format example (do not add extra keys):
-{{
-  "summary": "- Change 1...\\n- Change 2...",
-  "code": "#include <...>\\nint main(){{...}}"
-}}
+**Original Code:**
 """
 
 def call_ollama(prompt: str, model: str, temperature: float, max_tokens: int, request_timeout: int = 600) -> tuple[str, int]:
@@ -352,7 +367,7 @@ if run_clicked:
                         st.download_button(
                             label="Download rewritten code",
                             data=rewritten_code.encode("utf-8"),
-                            file_name="rewritten.c",
+                            file_name=f"rewritten_code.{lan_type}",
                             mime="text/x-csrc",
                             use_container_width=True
                         )
@@ -395,7 +410,7 @@ if st.session_state.get("loaded_output_code") and not st.session_state.get("just
         st.download_button(
             label="Download loaded code",
             data=st.session_state["loaded_output_code"].encode("utf-8"),
-            file_name="rewritten.c",
+            file_name=f"rewritten_code.{lan_type}",
             mime="text/x-csrc",
             use_container_width=True
         )
@@ -415,6 +430,7 @@ else:
         f'<div class="small-caption">Provider: Codestral Model: {selected_model} API URL: {MISTRAL_API_URL}</div>',
         unsafe_allow_html=True
     )
+
 
 
 
