@@ -71,7 +71,7 @@ st.markdown(f'<div class="small-caption {supa_class}">{supa_status}</div>', unsa
 # Laungauge selection UI
 # -------------------------
 st.markdown("Provide guidelines and code. Choose programming laungauge and local or cloud model provider, then generate.")
-Laungauge = st.selectbox("Laungauge", ["C", "Python"])
+Language = st.selectbox("Language", ["C", "Python"])
 
 
 # -------------------------
@@ -212,7 +212,7 @@ with code_col:
 # -------------------------
 # Prompt and generators
 # -------------------------
-def build_prompt_for_summary_and_code(guidelines: str, code: str, Laungauge:str) -> str:
+def build_prompt_for_summary_and_code(guidelines: str, code: str, Language:str) -> str:
     return f"""##🎯 Code Refactoring Task: {Language} Expert Rewrite
 
 You are an expert **{Language} Engineer**. Your task is to refactor the provided code according to a set of mandatory **Guidelines**.
@@ -430,6 +430,7 @@ else:
         f'<div class="small-caption">Provider: Codestral Model: {selected_model} API URL: {MISTRAL_API_URL}</div>',
         unsafe_allow_html=True
     )
+
 
 
 
