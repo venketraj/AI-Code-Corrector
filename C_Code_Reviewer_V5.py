@@ -233,7 +233,7 @@ Your `summary` key must be a detailed explanation of the **refactoring actions**
 
 ### 📥 Inputs
 **Language:** {Language}
-**Guidelines:** {Guidelines}
+**Guidelines:** {guidelines}
 **Original Code:**
 """
 
@@ -421,6 +421,7 @@ else:
         f'<div class="small-caption">Provider: Codestral Model: {selected_model} API URL: {MISTRAL_API_URL}</div>',
         unsafe_allow_html=True
     )
+
 
 
 
