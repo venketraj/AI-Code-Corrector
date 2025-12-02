@@ -226,7 +226,6 @@ You are an expert **{Language} Engineer**. Your task is to refactor the provided
 * **Apply All Rules:** Every guideline must be applied where relevant.
 * **Maintain Functionality:** The rewritten code must be functionally equivalent to the original.
 * **Clarity over Density:** While striving for compactness, prioritize code readability and adherence to modern {Language} best practices.
-* **Visualise using markdown : the final change summary should have markdown embedded for key changes like line numbers and present in a decorative and visually appealing.
 
 ### 3. 📝 Output Requirement & Format
 
@@ -234,7 +233,7 @@ Return a **compact, single-line JSON object** with exactly two top-level keys. N
 
 | Key | Value Type | Description |
 | :--- | :--- | :--- |
-| **"summary"** | String | A **bulleted list** of changes. Each bullet MUST include the guideline applied, the function/area affected, and the approximate line number(s). Example: `- [Guideline Name] Refactored loop condition for efficiency (L45-L48).` |
+| **"summary"** | String | A **bulleted list** of changes. Each bullet MUST include the guideline applied, the function/area affected, and the approximate line number(s) , use markdown to highlight guideline name and line numbers. Example: `- [Guideline Name] Refactored loop condition for efficiency (L45-L48).` |
 | **"code"** | String | The final, fully rewritten and functional {Language} source code as a single plain string (properly escaped for JSON). |
 
 ### 4. 🚀 Task Execution
@@ -431,6 +430,7 @@ else:
         f'<div class="small-caption">Provider: Codestral Model: {selected_model} API URL: {MISTRAL_API_URL}</div>',
         unsafe_allow_html=True
     )
+
 
 
 
