@@ -195,15 +195,19 @@ with guidelines_col:
     guidelines_text = st.text_area("Or paste guidelines", value=default_guidelines, height=200, placeholder="e.g., optimize loops, add comments, use const where appropriate")
 
 with code_col:
-    st.subheader("C code")
-    uploaded_code = st.file_uploader("Upload C code (.c, .h, .txt)", type=["c", "h", "txt"], key="code_upl", accept_multiple_files=False)
+    if Laungauge == "Python":
+        lan_type = ".py"
+    else:
+        lan_type = ".c"
+    st.subheader(f"{Laungauge} code")
+    uploaded_code = st.file_uploader(f"Upload {Laungauge} code ({lan_type}, .txt)", type=[f"{lan_type}", "txt"], key="code_upl", accept_multiple_files=False)
     default_input_code = st.session_state.get("loaded_input_code", "")
     if uploaded_code is not None:
         try:
             default_input_code = uploaded_code.read().decode("utf-8", errors="ignore")
         except Exception:
             st.error("Failed to read code file; fallback to text area.")
-    input_code = st.text_area("Or paste C code", value=default_input_code, height=200, placeholder="Paste C code here")
+    input_code = st.text_area(f"Or paste {Laungauge} code", value=default_input_code, height=200, placeholder=f"Paste {Laungauge} code here")
 
 # -------------------------
 # Prompt and generators
@@ -411,5 +415,6 @@ else:
         f'<div class="small-caption">Provider: Codestral Model: {selected_model} API URL: {MISTRAL_API_URL}</div>',
         unsafe_allow_html=True
     )
+
 
 
