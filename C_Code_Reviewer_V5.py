@@ -213,27 +213,27 @@ with code_col:
 # Prompt and generators
 # -------------------------
 def build_prompt_for_summary_and_code(guidelines: str, code: str, Language:str) -> str:
-    return f"""## 🏗️ Architectural Refactoring: {Language}
+    return f"""## 🎯 Code Refactoring Task: {Language} Expert
 
-You are a **Clean Code Instructor**. Refactor the provided code to adhere to the given guidelines.
+You are an expert **{Language} Engineer**. Refactor the provided code according to the mandatory **Guidelines**.
 
-### 🔍 Summary Requirements
-Your `summary` key must be a detailed explanation of the **refactoring actions** taken. Do not just list line numbers; explain the transformation.
+### 📋 Output Requirements
+Return a compact JSON object with exactly two keys (`summary`, `code`).
 
-* Use **Markdown Bolding** to highlight the **Action Verb** (e.g., **Extracted**, **Renamed**, **Optimized**).
-* Structure each bullet to explain the *Benefit* of the change.
-* **Format Example:**
-    `- **Extracted Logic (G4):** The data parsing logic inside `main` (L20-L40) was **extracted** into a new helper function `parse_data()` to improve separation of concerns.`
+1. **"summary"**: A bulleted list representing a **Visual Diff** of changes.
+   - You MUST use **Markdown bolding** for the Guideline Name.
+   - You MUST use **`code ticks`** to highlight specific function names, variables, or syntax that changed.
+   - **Format:** `- **[Guideline Name]**: In function `function_name` (L#), changed `old_snippet` to `new_snippet` to improve [specific metric].`
 
-### 📤 JSON Output
-{{
-  "summary": "...",
-  "code": "..."
-}}
+2. **"code"**: The final rewritten {Language} source code.
 
-### 📥 Inputs
+### 🚀 Task Execution
+
 **Language:** {Language}
-**Guidelines:** {guidelines}
+
+**Guidelines:**
+{guidelines}
+
 **Original Code:**
 """
 
@@ -421,6 +421,7 @@ else:
         f'<div class="small-caption">Provider: Codestral Model: {selected_model} API URL: {MISTRAL_API_URL}</div>',
         unsafe_allow_html=True
     )
+
 
 
 
