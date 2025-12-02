@@ -83,7 +83,7 @@ PROVIDER_CODESTRAL = "Mistral Codestral (cloud)"
 # -------------------------
 # Provider selection UI
 # -------------------------
-st.markdown("Provide guidelines and C code. Choose local or cloud model provider, then generate.")
+st.markdown(f"Provide guidelines and {Laungauge} code. Choose local or cloud model provider, then generate.")
 provider = st.selectbox("Provider", [PROVIDER_OLLAMA, PROVIDER_CODESTRAL])
 
 if provider == PROVIDER_OLLAMA:
@@ -415,6 +415,7 @@ else:
         f'<div class="small-caption">Provider: Codestral Model: {selected_model} API URL: {MISTRAL_API_URL}</div>',
         unsafe_allow_html=True
     )
+
 
 
 
