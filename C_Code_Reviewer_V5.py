@@ -344,7 +344,7 @@ if run_clicked:
     elif provider == PROVIDER_CODESTRAL and not MISTRAL_API_KEY:
         st.error("MISTRAL_API_KEY is not set. Configure it to use Codestral.")
     else:
-        full_prompt = build_prompt_for_summary_and_code(guidelines_text, input_code, Laungauge)
+        full_prompt = build_prompt_for_summary_and_code(guidelines_text, input_code, Language)
         with st.spinner(f"Generating with {provider}..."):
             try:
                 raw_text, runtime_s = generate_text(
@@ -430,6 +430,7 @@ else:
         f'<div class="small-caption">Provider: Codestral Model: {selected_model} API URL: {MISTRAL_API_URL}</div>',
         unsafe_allow_html=True
     )
+
 
 
 
