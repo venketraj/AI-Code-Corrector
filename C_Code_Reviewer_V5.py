@@ -99,7 +99,7 @@ else:
 # Controls
 # -------------------------
 temperature = 0.4
-max_tokens = 100000
+max_tokens = 10000000000
 
 # Session defaults for history load
 for key, default in [
@@ -421,6 +421,7 @@ else:
         f'<div class="small-caption">Provider: Codestral Model: {selected_model} API URL: {MISTRAL_API_URL}</div>',
         unsafe_allow_html=True
     )
+
 
 
 
