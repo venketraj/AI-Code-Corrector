@@ -213,21 +213,31 @@ with code_col:
 # Prompt and generators
 # -------------------------
 def build_prompt_for_summary_and_code(guidelines: str, code: str, Language:str) -> str:
-    return f"""## 🎯 Code Refactoring Task: {Language} Expert
+    return f"""##🎯 Code Refactoring Task: {Language} Expert Rewrite
 
-You are an expert **{Language} Engineer**. Refactor the provided code according to the mandatory **Guidelines**.
+You are an expert **{Language} Engineer**. Your task is to refactor the provided code according to a set of mandatory **Guidelines**.
 
-### 📋 Output Requirements
-Return a compact JSON object with exactly two keys (`summary`, `code`).
+### 1. 📋 Input Variables
+1.  **{Language}:** The programming language of the code (e.g., Python, C++, Java).
+2.  **Guidelines:** A list of rules that **must** be applied during the rewrite.
+3.  **Original Code:** The source code block to be refactored.
 
-1. **"summary"**: A bulleted list representing a **Visual Diff** of changes.
-   - You MUST use **Markdown bolding** for the Guideline Name.
-   - You MUST use **`code ticks`** to highlight specific function names, variables, or syntax that changed.
-   - **Format:** `- **[Guideline Name]**: In function `function_name` (L#), changed `old_snippet` to `new_snippet` to improve [specific metric].`
+### 2. 🛠️ Guidelines for Refactoring
+* **Apply All Rules:** Every guideline must be applied where relevant.
+* **Maintain Functionality:** The rewritten code must be functionally equivalent to the original.
+* **Clarity over Density:** While striving for compactness, prioritize code readability and adherence to modern {Language} best practices.
+* **Visualise using markdown : the final change summary should have markdown embedded for key changes like line numbers and present in a decorative and visually appealing.
 
-2. **"code"**: The final rewritten {Language} source code.
+### 3. 📝 Output Requirement & Format
 
-### 🚀 Task Execution
+Return a **compact, single-line JSON object** with exactly two top-level keys. No other text, explanations, or conversational filler should precede or follow the JSON object.
+
+| Key | Value Type | Description |
+| :--- | :--- | :--- |
+| **"summary"** | String | A **bulleted list** of changes. Each bullet MUST include the guideline applied, the function/area affected, and the approximate line number(s). Example: `- [Guideline Name] Refactored loop condition for efficiency (L45-L48).` |
+| **"code"** | String | The final, fully rewritten and functional {Language} source code as a single plain string (properly escaped for JSON). |
+
+### 4. 🚀 Task Execution
 
 **Language:** {Language}
 
@@ -421,6 +431,7 @@ else:
         f'<div class="small-caption">Provider: Codestral Model: {selected_model} API URL: {MISTRAL_API_URL}</div>',
         unsafe_allow_html=True
     )
+
 
 
 
